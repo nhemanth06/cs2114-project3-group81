@@ -37,6 +37,8 @@ public class Deque<T> extends DLinkedDeque<T> {
         size--;
         return first;
     }
+    
+    
 
 
     @Override

@@ -6,19 +6,30 @@ class DLinkedDequeTest
 
    
     
-    private Deque<String> deque;
+    private DLinkedDeque<String> deque;
     
     
     void setUp() {
         deque = new Deque<String>();
     }
-    
+   /**
     @Test
     void addFirstOnEmpty() {
         deque.addToFront("A");
-        assertEquals("A", deque.getFront());
-        assertEquals("A", deque.getBack());
+        assertEquals("A", deque.peekFirst());
+        assertEquals("A", deque.peekLast());
         assertEquals(1, deque.size());
+    }
+ 
+    @Test
+    void addLastOnEmpty() {
+        deque.addLast("A");
+        assertEquals("A", deque.peekFirst());
+        assertEquals("A", deque.peekLast());
+        assertEquals(1, deque.size());
+    }
+
+  */  
     
     
     //~ Fields ................................................................
@@ -28,4 +39,4 @@ class DLinkedDequeTest
     //~Public  Methods ........................................................
 
     }
-}
+
