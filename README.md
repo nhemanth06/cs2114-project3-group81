@@ -28,6 +28,8 @@ peek // Returns the oldest priority drink without removing it, this will allow t
 
 We will then begin working on some of our stretch goals, such as the Rush Hour feature.
 
+As far as owners for each part, Hemanth will finish up the Deque implementation and update the main loop so that it works with all of the new method. Richard will add the LinkedStackADT to set up the framework for the priority system. Talal will begin working on creating a menu of allowed orders, and Aidan will work on the Rush Hour stretch goal feature.
+
 
 Attribution
 
