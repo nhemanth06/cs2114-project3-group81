@@ -5,6 +5,7 @@ public class MainLoop {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         boolean exit = false;
+        Deque<DrinkOrder> line = new Deque<DrinkOrder>();
         while (!exit) {
             System.out.println(
                 "What would you like to do? Press 1 to add an order, 2 to see the next order, and 0 to exit.");
@@ -26,6 +27,18 @@ public class MainLoop {
                     priorBool = true;
                 }
                 DrinkOrder curr = new DrinkOrder(cname, dname, sz, priorBool);
+                line.addToBack(curr);
+            }
+            if (input==2) {
+                DrinkOrder out = line.removeFront();
+                System.out.println("Name: " + out.getCustName());
+                System.out.println("Drink: " + out.getDrinkName());
+                System.out.println("Size: " + out.getSize());
+                if (out.getPriority()) {
+                    System.out.println("Priority: Yes");
+                } else {
+                    System.out.println("Priority: No");
+                }
             }
         }
     }

@@ -12,7 +12,7 @@ public class Deque<T> extends DLinkedDeque<T> {
     public void addToBack(T newEntry) {
         // TODO Auto-generated method stub
         DLNode<T> entry = new DLNode<T>(lastNode, newEntry, null);
-        if (isEmpty()) {
+        if (size()==0) {
             firstNode = entry;
         }
         else {
@@ -49,7 +49,7 @@ public class Deque<T> extends DLinkedDeque<T> {
     @Override
     public T getFront() {
         // TODO Auto-generated method stub
-        return null;
+        return firstNode.getData();
     }
 
 
