@@ -19,7 +19,9 @@ There is currently an issue with our implementation of the Deque that must be sm
 
 Next Steps
 
-Of course, we will add the priority system and make the Deque work both ways, as a Deque should.
+Of course, we will add the priority system and make the Deque work both ways, as a Deque should. In terms of specific methods being added to the Deque, it will be addToFront, removeBack, getBack, isEmpty, and clear. 
+
+We will add the LinkedStack class so that the priority adding system can work correctly. In addition to the methods above, our Deque class will have a generalized "add" method that adds to the front or back based on the Object's priority. This is because our Deque implementation needs to be different from what is provided anyway.
 
 We will then begin working on some of our stretch goals, such as the Rush Hour feature.
 
