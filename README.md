@@ -26,9 +26,11 @@ push // adds a priority drink order to the bottom of the stack // Controller wil
 pop // will return the oldest priority order from the top of the stack // Emptyqueue class will throw the empty queue error on an empty queue
 peek // Returns the oldest priority drink without removing it, this will allow the user to see what priority drink needs to be completed next.
 
+After this, we will complete the test classes for both data structures and our DrinkOrder object class.
+
 We will then begin working on some of our stretch goals, such as the Rush Hour feature.
 
-As far as owners for each part, Hemanth will finish up the Deque implementation and update the main loop so that it works with all of the new method. Richard will add the LinkedStackADT to set up the framework for the priority system. Talal will begin working on creating a menu of allowed orders, and Aidan will work on the Rush Hour stretch goal feature.
+As far as owners for each part, Hemanth will finish up the Deque implementation and update the main loop so that it works with all of the new method. Hemanth will also write a test class for DrinkOrder. Richard will add the LinkedStackADT to set up the framework for the priority system. Talal will begin working on creating a menu of allowed orders, and Aidan will work on the Rush Hour stretch goal feature.
 
 
 Attribution
