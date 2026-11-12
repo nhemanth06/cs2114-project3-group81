@@ -1,3 +1,8 @@
+Run Instructions: 
+
+To run the program, simply press the run button on the MainLoop.java file.
+
+
 Reflection
 
 We did not really change anything from our spec document. 
