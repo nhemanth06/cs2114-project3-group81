@@ -30,5 +30,9 @@ Hemanth: DrinkOrder class and MainLoop class
 
 Richard: Deque Implementation/Deque Test Class
 
+Talal: Attribution Table
+
+Aidan: README Review
+
 Group Gen AI Transcript:
 The group largely did not use AI and instead opted to use precious class material as a refrence when implementing deque logic & syntax. What the group plans to do is utilize AI later in the project; mainly to cover weak aspects, ensure our tests have good coverage and overall strengthen the integrity of our code.
