@@ -22,9 +22,11 @@ Next Steps
 Of course, we will add the priority system and make the Deque work both ways, as a Deque should. In terms of specific methods being added to the Deque, it will be addToFront, removeBack, getBack, isEmpty, and clear. 
 
 We will add the LinkedStack class so that the priority adding system can work correctly. In addition to the methods above, our Deque class will have a generalized "add" method that adds to the front or back based on the Object's priority. This is because our Deque implementation needs to be different from what is provided anyway.
+push // adds a priority drink order to the bottom of the stack // Controller will handle bad input
+pop // will return the oldest priority order from the top of the stack // Emptyqueue class will throw the empty queue error on an empty queue
+peek // Returns the oldest priority drink without removing it, this will allow the user to see what priority drink needs to be completed next.
 
 We will then begin working on some of our stretch goals, such as the Rush Hour feature.
-
 
 
 Attribution
