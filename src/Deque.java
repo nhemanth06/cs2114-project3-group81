@@ -4,7 +4,15 @@ public class Deque<T> extends DLinkedDeque<T> {
     @Override
     public void addToFront(T newEntry) {
         // TODO Auto-generated method stub
-
+        DLNode<T> entry = new DLNode<T>(null, newEntry, firstNode);
+        if (isEmpty()) {
+            lastNode = entry;
+        }
+        else {
+            firstNode.setPreviousNode(entry);
+        }
+        firstNode = entry;
+        size++;
     }
 
 
@@ -12,7 +20,7 @@ public class Deque<T> extends DLinkedDeque<T> {
     public void addToBack(T newEntry) {
         // TODO Auto-generated method stub
         DLNode<T> entry = new DLNode<T>(lastNode, newEntry, null);
-        if (size()==0) {
+        if (size() == 0) {
             firstNode = entry;
         }
         else {
@@ -26,6 +34,9 @@ public class Deque<T> extends DLinkedDeque<T> {
     @Override
     public T removeFront() {
         // TODO Auto-generated method stub
+        if (isEmpty()) {
+            throw new EmptyQueueException("There are no orders in line.");
+        }
         T first = getFront();
         firstNode = firstNode.getNextNode();
         if (firstNode == null) {
@@ -37,20 +48,33 @@ public class Deque<T> extends DLinkedDeque<T> {
         size--;
         return first;
     }
-    
-    
 
 
     @Override
     public T removeBack() {
         // TODO Auto-generated method stub
-        return null;
+        if (isEmpty()) {
+            throw new EmptyQueueException("There are no orders in line.");
+        }
+        T last = getBack();
+        lastNode = lastNode.getPreviousNode();
+        if (lastNode == null) {
+            firstNode = null;
+        }
+        else {
+            lastNode.setNextNode(null);
+        }
+        size--;
+        return last;
     }
 
 
     @Override
     public T getFront() {
         // TODO Auto-generated method stub
+        if (isEmpty()) {
+            throw new EmptyQueueException("There are no orders in line.");
+        }
         return firstNode.getData();
     }
 
@@ -58,21 +82,25 @@ public class Deque<T> extends DLinkedDeque<T> {
     @Override
     public T getBack() {
         // TODO Auto-generated method stub
-        return null;
+        if (isEmpty()) {
+            throw new EmptyQueueException("There are no orders in line.");
+        }
+        return lastNode.getData();
     }
 
 
     @Override
     public boolean isEmpty() {
         // TODO Auto-generated method stub
-        return false;
+        return size == 0;
     }
 
 
     @Override
     public void clear() {
         // TODO Auto-generated method stub
-
+        while (lastNode != null) {
+            T out = removeFront();
+        }
     }
-
 }
