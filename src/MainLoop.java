@@ -89,5 +89,143 @@ public class MainLoop
         System.out.println("Error: please enter a number from 0 to 5.");
         return -1;
     }
+    
+    // ----- Bad Input mitigation -----
+ // ---- prompts: each repeats until it gets a valid answer ----
+
+    private static String promptName(Scanner scan) {
+        while (true) {
+            System.out.print("Enter customer name: ");
+            String name = scan.nextLine();
+            try {
+                DrinkOrder.checkName(name);
+                return name.trim();
+            }
+            catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+    }
+
+
+    private static String promptDrink(Scanner scan) {
+        List<String> drinks = DrinkOrder.DRINKS;
+        while (true) {
+            System.out.println("Choose a drink:");
+            for (int i = 0; i < drinks.size(); i++) {
+                System.out.println("  " + (i + 1) + " - " + drinks.get(i));
+            }
+            System.out.print("Drink number: ");
+            String text = scan.nextLine().trim();
+            try {
+                int number = Integer.parseInt(text);
+                if (number >= 1 && number <= drinks.size()) {
+                    return drinks.get(number - 1);
+                }
+            }
+            catch (NumberFormatException e) {
+                // falls through to the error message
+            }
+            System.out.println("Error: please enter a number from 1 to "
+                + drinks.size() + ".");
+        }
+    }
+
+
+    private static String promptSize(Scanner scan) {
+        while (true) {
+            System.out.print("Enter size (S/M/L): ");
+            String size = scan.nextLine().trim().toUpperCase();
+            try {
+                DrinkOrder.checkSize(size);
+                return size;
+            }
+            catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+    }
+
+
+    private static boolean promptPriority(Scanner scan) {
+        while (true) {
+            System.out.print("Priority order? (y/n): ");
+            String answer = scan.nextLine().trim().toLowerCase();
+            if (answer.equals("y")) {
+                return true;
+            }
+            if (answer.equals("n")) {
+                return false;
+            }
+            System.out.println("Error: please enter y or n.");
+        }
+    }
+
+
+    
+    
+    // ----- Start of commands -----
+    private static void addOrder(Scanner scan, Deque<DrinkOrder> line) {
+        String name = promptName(scan);
+        String drink = promptDrink(scan);
+        String size = promptSize(scan);
+        boolean priority = promptPriority(scan);
+
+        DrinkOrder order = new DrinkOrder(name, drink, size, priority);
+        if (order.getPriority()) {
+            line.addToFront(order);
+        }
+        else {
+            line.addToBack(order);
+        }
+        System.out.println("Added: " + order);
+    }
+
+
+    private static void viewNext(Deque<DrinkOrder> line) {
+        try {
+            System.out.println("Next order: " + line.getFront());
+        }
+        catch (EmptyQueueException e) {
+            System.out.println(NO_ORDERS);
+        }
+    }
+
+
+    private static void completeNext(
+        Deque<DrinkOrder> line,
+        Deque<DrinkOrder> completed) {
+        try {
+            DrinkOrder done = line.removeFront();
+            completed.addToBack(done);
+            System.out.println("Completed: " + done);
+        }
+        catch (EmptyQueueException e) {
+            System.out.println(NO_ORDERS);
+        }
+    }
+
+
+    private static void viewCompleted(Deque<DrinkOrder> completed) {
+        List<DrinkOrder> orders = completed.toList();
+        if (orders.isEmpty()) {
+            System.out.println("No completed orders yet.");
+            return;
+        }
+        System.out.println("Completed orders:");
+        for (int i = 0; i < orders.size(); i++) {
+            System.out.println("  " + (i + 1) + ". " + orders.get(i));
+        }
+    }
+
+
+    private static void viewCounts(
+        Deque<DrinkOrder> line,
+        Deque<DrinkOrder> completed) {
+        System.out.println("Waiting: " + line.size());
+        System.out.println("Completed: " + completed.size());
+    }
+
+    
 
 }
