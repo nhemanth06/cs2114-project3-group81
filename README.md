@@ -17,7 +17,8 @@ displays it.
 There is currently an issue with our implementation of the Deque that must be smoothed out before the program works correctly.
 
 
-What doesn't work yet?
+
+What doesn't work yet?:
 
 Working and tested: All five MVP commands (add order, view next, complete next, view completed, view counts) run through CafeController without crashing. The bad-input cases from our scope are handled with an error message and a re-prompt: non-numeric or out-of-range menu choices, a blank name, a name over 50 characters, a drink number not on the menu, a size other than S/M/L, a priority answer other than y/n, and viewing or completing an order when the line is empty. All 40 JUnit tests (DLinkedDequeTest, OrderQueueTest, CafeControllerTest) pass.
 
