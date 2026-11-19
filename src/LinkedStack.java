@@ -8,7 +8,7 @@ import java.util.EmptyStackException;
  * @param <T>
  *            generic type for the stack
  */
-public class LinkedStack<T>
+public class LinkedStack<T> implements StackInterface<T>
 {
     //~ Fields ................................................................
 
@@ -31,6 +31,7 @@ public class LinkedStack<T>
 
     //~ Public Methods ........................................................
 
+    @Override
     public void push(T newEntry)
     {
         topNode = new Node<T>(newEntry, topNode);
@@ -38,6 +39,7 @@ public class LinkedStack<T>
     }
 
 
+    @Override
     public T pop()
     {
         T top = peek();
@@ -47,6 +49,7 @@ public class LinkedStack<T>
     }
 
 
+    @Override
     public T peek()
     {
         if (isEmpty())
@@ -57,12 +60,14 @@ public class LinkedStack<T>
     }
 
 
+    @Override
     public boolean isEmpty()
     {
         return topNode == null;
     }
 
 
+    @Override
     public void clear()
     {
         topNode = null;
