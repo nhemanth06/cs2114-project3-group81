@@ -7,51 +7,41 @@ public class MainLoop
 {
     private static final String NO_ORDERS = "No orders waiting.";
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+        OrderQueue queue = new OrderQueue();
         boolean exit = false;
-        Deque<DrinkOrder> completed = new Deque<DrinkOrder>();
-        Deque<DrinkOrder> line = new Deque<DrinkOrder>();
 
-        try
-        {
-            while (!exit)
-            {
+        try {
+            while (!exit) {
                 showMenu();
                 int choice = readChoice(scan);
-                if (choice == 0)
-                {
+                if (choice == 0) {
                     exit = true;
                 }
-                else if (choice == 1)
-                {
-                    addOrder(scan, line);
+                else if (choice == 1) {
+                    addOrder(scan, queue);
                 }
-                else if (choice == 2)
-                {
-                    viewNext(line);
+                else if (choice == 2) {
+                    viewNext(queue);
                 }
-                else if (choice == 3)
-                {
-                    completeNext(line, completed);
+                else if (choice == 3) {
+                    completeNext(queue);
                 }
-                else if (choice == 4)
-                {
-                    viewCompleted(completed);
+                else if (choice == 4) {
+                    viewCompleted(queue);
                 }
-                else if (choice == 5)
-                {
-                    viewCounts(line, completed);
+                else if (choice == 5) {
+                    viewCounts(queue);
                 }
             }
         }
-        catch (NoSuchElementException e)
-        {
+        catch (NoSuchElementException e) {
             System.out.println("\nInput ended.");
         }
         System.out.println("Goodbye!");
     }
+
 
     // ---- Show user menu ----
 
@@ -165,26 +155,21 @@ public class MainLoop
     
     
     // ----- Start of commands -----
-    private static void addOrder(Scanner scan, Deque<DrinkOrder> line) {
+    private static void addOrder(Scanner scan, OrderQueue queue) {
         String name = promptName(scan);
         String drink = promptDrink(scan);
         String size = promptSize(scan);
         boolean priority = promptPriority(scan);
 
         DrinkOrder order = new DrinkOrder(name, drink, size, priority);
-        if (order.getPriority()) {
-            line.addToFront(order);
-        }
-        else {
-            line.addToBack(order);
-        }
+        queue.enqueue(order);
         System.out.println("Added: " + order);
     }
 
 
-    private static void viewNext(Deque<DrinkOrder> line) {
+    private static void viewNext(OrderQueue queue) {
         try {
-            System.out.println("Next order: " + line.getFront());
+            System.out.println("Next order: " + queue.peek());
         }
         catch (EmptyQueueException e) {
             System.out.println(NO_ORDERS);
@@ -192,12 +177,10 @@ public class MainLoop
     }
 
 
-    private static void completeNext(
-        Deque<DrinkOrder> line,
-        Deque<DrinkOrder> completed) {
+    private static void completeNext(OrderQueue queue)
+         {
         try {
-            DrinkOrder done = line.removeFront();
-            completed.addToBack(done);
+            DrinkOrder done = queue.dequeue();
             System.out.println("Completed: " + done);
         }
         catch (EmptyQueueException e) {
@@ -206,8 +189,8 @@ public class MainLoop
     }
 
 
-    private static void viewCompleted(Deque<DrinkOrder> completed) {
-        List<DrinkOrder> orders = completed.toList();
+    private static void viewCompleted(OrderQueue queue) {
+        List<DrinkOrder> orders = queue.getCompleted();
         if (orders.isEmpty()) {
             System.out.println("No completed orders yet.");
             return;
@@ -219,13 +202,8 @@ public class MainLoop
     }
 
 
-    private static void viewCounts(
-        Deque<DrinkOrder> line,
-        Deque<DrinkOrder> completed) {
-        System.out.println("Waiting: " + line.size());
-        System.out.println("Completed: " + completed.size());
+    private static void viewCounts(OrderQueue queue) {
+        System.out.println("Waiting: " + queue.waitingCount());
+        System.out.println("Completed: " + queue.completedCount());
     }
-
-    
-
 }
