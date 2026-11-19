@@ -42,7 +42,7 @@ Flash Demonstration
 Our demo will be relatively simple as there are not a plethora of features within this project.
 We plan to spend the first quater demonstrating bad input and the exceptions/re-prompting that guides the user in the correct direction. Most of the demonstration will be about the main purpose of the model. That is, adding and keeping track of orders in the correct manner (highest priority orders, the oldest priority, take highest priority in what gets completed first, Completing/cancelling orders, showing updtated deque information matches and reflects the intended logic, and demonstrating a that a log of completed orders for a shift can be exported to csv.
 
-Attribution
+Attribution for D4
 
 - Hemanth: Deque Implementation/Deque Test Class/OrderQueue
 
@@ -52,5 +52,37 @@ Attribution
 
 - Aidan: README Review
 
+Projected Attribution for D5
+
+File / Class   ||  	Primary Owner(s)   ||  	Role & Contribution
+
+CafeController.java //	Talal, Aidan	 // Menu options and order-command handling
+
+CafeControllerTest.java //	Richard	//  Tests for controller inputs and menu flow
+
+ConsoleView.java //	Richard //	Menu display and order information output
+
+Deque.java  //	Hemanth //	Queue wrapper and snapshot methods
+
+DequeInterface.java //  Hemanth  // Interface provided or reviewed
+
+DLinkedDeque.java  //  Richard	 //  Doubly linked deque operations
+
+DLinkedDequeTest.java // 	Aidan	// JUnit tests for deque operations and edge cases
+
+DrinkOrder.java	// Richard // 	Order information and field validation
+
+EmptyQueueException.java	 //  Talal 	//  Exception class provided or reviewed
+
+MainLoop.java // 	Hemanth  //	 Main application entry point
+
+OrderQueue.java //	Richard  // 	Queue management and order sequencing
+
+OrderQueueTest.java 	//  Aidan	 // Tests for queue operations and order sequencing
+
+README.md // Talal, everyone // 	Reflection, next steps, and attribution documentation
+
+
 Group Gen AI Transcript:
+
 The group made moderate use of AI and also opted to use previous class material as a refrence when implementing deque/LinkedStack logic & syntax. What the group plans to do is utilize AI essentially the same way later in the project; mainly to cover weak aspects, ensure our tests have good coverage and overall strengthen the integrity of our code.
