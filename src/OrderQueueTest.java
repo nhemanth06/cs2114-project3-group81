@@ -19,6 +19,7 @@ class OrderQueueTest
     private DrinkOrder p;
     private DrinkOrder p2;
 
+    //~ Setup .................................................................
 
     @BeforeEach
     void setUp() {
@@ -28,8 +29,10 @@ class OrderQueueTest
         p = new DrinkOrder("Pat", "Espresso", "S", true);
         p2 = new DrinkOrder("Pia", "Americano", "S", true);
     }
-    
- // ---- enqueue ----
+
+    //~ Public Methods ........................................................
+
+    // ---- enqueue ----
 
     @Test
     void enqueueRegularOrdersGoToBack() {
@@ -61,11 +64,61 @@ class OrderQueueTest
 
 
     @Test
-    void laterPriorityOrderIsServedBeforeEarlierPriorityOrder() {
+    void oldestPriorityOrderIsServedBeforeNewerPriorityOrder() {
         queue.enqueue(p);
         queue.enqueue(p2);
-        assertEquals(p2, queue.peek());
-        assertEquals(List.of(p2, p), queue.getWaiting());
+        assertEquals(p, queue.peek());
+        assertEquals(List.of(p, p2), queue.getWaiting());
+    }
+
+
+    @Test
+    void priorityOrderGoesBehindOlderPriorityButAheadOfRegular() {
+        queue.enqueue(a);
+        queue.enqueue(p);
+        queue.enqueue(b);
+        queue.enqueue(p2);
+        assertEquals(List.of(p, p2, a, b), queue.getWaiting());
+    }
+
+
+    @Test
+    void manyPriorityOrdersKeepArrivalOrder() {
+        DrinkOrder p3 = new DrinkOrder("Pam", "Mocha", "M", true);
+        queue.enqueue(a);
+        queue.enqueue(p);
+        queue.enqueue(p2);
+        queue.enqueue(p3);
+        assertEquals(List.of(p, p2, p3, a), queue.getWaiting());
+        assertEquals(p, queue.dequeue());
+        assertEquals(p2, queue.dequeue());
+        assertEquals(p3, queue.dequeue());
+        assertEquals(a, queue.dequeue());
+    }
+
+
+    @Test
+    void priorityOrderAfterServingSomeStillGoesBehindOlderPriority() {
+        queue.enqueue(p);
+        queue.enqueue(a);
+        queue.enqueue(p2);              // line: [p, p2, a]
+        assertEquals(p, queue.dequeue());
+        DrinkOrder p3 = new DrinkOrder("Pam", "Mocha", "M", true);
+        queue.enqueue(p3);              // line: [p2, p3, a]
+        assertEquals(List.of(p2, p3, a), queue.getWaiting());
+    }
+
+
+    @Test
+    void regularOrderNeverServedWhilePriorityOrderWaits() {
+        queue.enqueue(a);
+        queue.enqueue(b);
+        queue.enqueue(p);
+        assertEquals(p, queue.dequeue());
+        queue.enqueue(p2);              // arrives while a and b are waiting
+        assertEquals(p2, queue.dequeue());
+        assertEquals(a, queue.dequeue());
+        assertEquals(b, queue.dequeue());
     }
 
 
@@ -102,8 +155,8 @@ class OrderQueueTest
         assertEquals(a, queue.peek());
         assertEquals(2, queue.waitingCount());
     }
-    
-    
+
+
     @Test
     void peekOnEmptyThrows() {
         assertThrows(EmptyQueueException.class, () -> queue.peek());
@@ -179,6 +232,7 @@ class OrderQueueTest
         assertEquals(p, queue.peek());
     }
 
+
     @Test
     void getWaitingIsACopy() {
         queue.enqueue(a);
@@ -193,7 +247,7 @@ class OrderQueueTest
     void getCompletedIsInCompletionOrder() {
         queue.enqueue(a);
         queue.enqueue(b);
-        queue.enqueue(p);       
+        queue.enqueue(p);       // line: [p, a, b]
         queue.dequeue();
         queue.dequeue();
         assertEquals(List.of(p, a), queue.getCompleted());
