@@ -1,5 +1,10 @@
 # Project 3 - Deliverable 4: Second Prototype + Tests
 
+## Running the Program & its tests
+
+To run the program, once all files have been added, right click on the entire folder "cs2114-project3-group81" or the MainLoop.java file and clik "Run as Java Application".
+Each test for the classes will needed to be ran manually - click on each one and click "run as test"
+
 ## Reflection
 
 ### How did your design absorb the change?
@@ -71,8 +76,7 @@ We want the program to handle invalid menu choices, missing order information, a
 
 ### Remaining Work for the Final Build
 
-1. **Priority adding:** Implement priority orders so they are placed correctly in the queue, then test the behavior.
-2. **Order cancellation:** Let a customer cancel an order by name, even when it is in the middle of the queue.
+1. **Order cancellation:** Let a customer cancel an order by name, even when it is in the middle of the queue.
 3. **CSV export:** Save order history to a CSV file.
 4. **Console cleanup:** Improve the readability of menus and order information.
 
