@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.ArrayList;
+
 
 public class Deque<T> extends DLinkedDeque<T> {
 
@@ -103,4 +106,21 @@ public class Deque<T> extends DLinkedDeque<T> {
             T out = removeFront();
         }
     }
+        
+        /**
+         * Copy of the entries from front to back. Does not change the deque, so
+         * it can be used to display waiting orders without removing them.
+         *
+         * @return a new list holding the entries in order
+         */
+        public List<T> toList() {
+            List<T> items = new ArrayList<T>();
+            DLNode<T> current = firstNode;
+            while (current != null) {
+                items.add(current.getData());
+                current = current.getNextNode();
+            }
+            return items;
+        } 
+    
 }
