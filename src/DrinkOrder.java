@@ -13,7 +13,7 @@ public class DrinkOrder
     public static final List<String> DRINKS = List.of(
         "Black Coffee",
         "Latte",
-        "Cappucino",
+        "Cappuccino",
         "Americano",
         "Espresso",
         "Mocha");
