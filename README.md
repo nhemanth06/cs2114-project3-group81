@@ -7,14 +7,15 @@ Reflection
 
 Several things changed from our first prototype.
 Most importantly, the core features of the MVP have been completed, which includes the following:
- - Adding orders to the queue in order of importance
+ - Adding orders to the queue in order of importance (Non-trivial as this utilizes both DLinkedDeque/Linkedstack data states)
  - Viewing the highest priority order
  - Viewing completed/waiting orders
  - Completing orders in accordance to their priorty
  - A complete list of completed orders
+ 
 
 Behind the scenes, this included the implementation of what was listed under what did not work in the previous prototype. Originally we had the MainLoop class essentially take care of every aspect of Model/View/Controller
-which had to be revised in accordance to the rubric.
+which had to be revised in accordance to the rubric. This ended up increasing the overall amount of tests & exceptions that needed to be caught and accounted for.
 
 What doesn't work yet?
 
@@ -37,18 +38,19 @@ If given the chance, the group will work towards a GUI during the week of the fi
 
 As for the projected attribution for each part, Richard & Hemanth will continue to write the classes/test classes which are to be reviewed by Talal and Aidan. The group as a collective will agree on which stretch goals can stil be implemented or dropped; based on this discussion, the work distribution will be decided there.
 
+Flash Demonstration
 Our demo will be relatively simple as there are not a plethora of features within this project.
-We plan to spend the first quater demonstrating bad input and the exceptions/re-prompting that guides the user in the correct direction. Most of the demonstration will be about the main purpose of the model. That is, adding and keeping track of orders in the correct manner (highest priority orders, the oldest priority, take highest priority in what gets completed first, Completing/cancelling orders and demonstrating a that a log of completed orders for a shift can be exported to csv.
+We plan to spend the first quater demonstrating bad input and the exceptions/re-prompting that guides the user in the correct direction. Most of the demonstration will be about the main purpose of the model. That is, adding and keeping track of orders in the correct manner (highest priority orders, the oldest priority, take highest priority in what gets completed first, Completing/cancelling orders, showing updtated deque information matches and reflects the intended logic, and demonstrating a that a log of completed orders for a shift can be exported to csv.
 
 Attribution
 
-Hemanth: Deque Implementation/Deque Test Class/OrderQueue
+- Hemanth: Deque Implementation/Deque Test Class/OrderQueue
 
-Richard: DrinkOrder class/MainLoop class/LinkedStack & LinkedStack interface/OrderQueue/DrinkOrder/CafeController
+- Richard: DrinkOrder class/MainLoop class/LinkedStack & LinkedStack interface/OrderQueue/DrinkOrder/CafeController
 
-Talal: Attribution Table/OrderQueue/LinkedStack implementation
+- Talal: Attribution Table/OrderQueue/LinkedStack implementation
 
-Aidan: README Review
+- Aidan: README Review
 
 Group Gen AI Transcript:
 The group made moderate use of AI and also opted to use previous class material as a refrence when implementing deque/LinkedStack logic & syntax. What the group plans to do is utilize AI essentially the same way later in the project; mainly to cover weak aspects, ensure our tests have good coverage and overall strengthen the integrity of our code.
